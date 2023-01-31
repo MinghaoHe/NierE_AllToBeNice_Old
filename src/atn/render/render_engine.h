@@ -5,7 +5,8 @@
 #ifndef NIERE_ALLTOBENICE_RANDER_RENDER_ENGINE_H
 #define NIERE_ALLTOBENICE_RANDER_RENDER_ENGINE_H
 
-#include <set>
+#include <unordered_set>
+
 #include <3rdparty/glfw/glfw3.h>
 
 #include "atn/common/utility.h"
@@ -19,8 +20,10 @@ namespace render {
 
 class RenderEngine {
  public:
-  RenderEngine(base::WindowContext &window_context, std::set<std::shared_ptr<base::Object>> &objects,
-               std::unordered_map<std::string, std::shared_ptr<base::Object>> &global_objects_cache_map);
+  RenderEngine(base::WindowContext &window_context,
+               std::unordered_set<std::shared_ptr<base::Object>> &objects,
+               std::unordered_map<std::string, std::shared_ptr<base::Object>>
+                   &global_objects_cache_map);
 
   ~RenderEngine() noexcept;
 
@@ -37,21 +40,21 @@ class RenderEngine {
   std::shared_ptr<TextRender> GetTextRender();
 
  private:
-  static void FrameBufferSizeCallback(GLFWwindow *window, int width, int height);
+  static void FrameBufferSizeCallback(GLFWwindow *window, int width,
+                                      int height);
 
  private:
   base::WindowContext &window_context_;
-  std::set<std::shared_ptr<base::Object>> &objects_;
-  std::unordered_map<std::string, std::shared_ptr<base::Object>> &global_objects_cache_map_;
+  std::unordered_set<std::shared_ptr<base::Object>> &objects_;
+  std::unordered_map<std::string, std::shared_ptr<base::Object>>
+      &global_objects_cache_map_;
   RenderContext render_context_;
   std::shared_ptr<TextRender> text_render_;
 
   DISALLOW_COPY_AND_ASSIGN(RenderEngine);
 };
 
+}  // namespace render
+}  // namespace atn
 
-}
-}
-
-
-#endif // NIERE_ALLTOBENICE_RANDER_RENDER_ENGINE_H
+#endif  // NIERE_ALLTOBENICE_RANDER_RENDER_ENGINE_H

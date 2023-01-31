@@ -5,7 +5,7 @@
 #ifndef NIERE_ALLTOBENICE_LOGIC_LOGIC_ENGINE_H
 #define NIERE_ALLTOBENICE_LOGIC_LOGIC_ENGINE_H
 
-#include <set>
+#include <unordered_set>
 
 #include <3rdparty/glfw/glfw3.h>
 
@@ -14,14 +14,15 @@
 #include "atn/base/window_context.h"
 #include "atn/logic/logic_context.h"
 
-
 namespace atn {
 namespace logic {
 
 class LogicEngine {
  public:
-  LogicEngine(base::WindowContext &window_context, std::set<std::shared_ptr<base::Object>> &objects,
-              std::unordered_map<std::string, std::shared_ptr<base::Object>> &global_objects_cache_map);
+  LogicEngine(base::WindowContext &window_context,
+              std::unordered_set<std::shared_ptr<base::Object>> &objects,
+              std::unordered_map<std::string, std::shared_ptr<base::Object>>
+                  &global_objects_cache_map);
 
   ~LogicEngine() noexcept;
 
@@ -39,15 +40,15 @@ class LogicEngine {
 
  private:
   base::WindowContext &window_context_;
-  std::set<std::shared_ptr<base::Object>> &objects_;
-  std::unordered_map<std::string, std::shared_ptr<base::Object>> &global_objects_cache_map_;
+  std::unordered_set<std::shared_ptr<base::Object>> &objects_;
+  std::unordered_map<std::string, std::shared_ptr<base::Object>>
+      &global_objects_cache_map_;
   LogicContext logic_context_;
 
   DISALLOW_COPY_AND_ASSIGN(LogicEngine);
 };
 
-}
-}
+}  // namespace logic
+}  // namespace atn
 
-
-#endif // NIERE_ALLTOBENICE_LOGIC_LOGIC_ENGINE_H
+#endif  // NIERE_ALLTOBENICE_LOGIC_LOGIC_ENGINE_H

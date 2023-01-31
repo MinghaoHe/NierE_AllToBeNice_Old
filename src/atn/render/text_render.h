@@ -5,11 +5,10 @@
 #ifndef NIERE_ALLTOBENICE_RENDER_TEXT_RENDER_H
 #define NIERE_ALLTOBENICE_RENDER_TEXT_RENDER_H
 
-
 #include <unordered_map>
 
-#include <opengl/gl3.h>
-#include <glm/glm.hpp>
+#include <3rdparty/glad/glad.h>
+#include <3rdparty/glm/glm.hpp>
 
 
 namespace atn {
@@ -28,7 +27,6 @@ class TextRender {
 
   ~TextRender();
 
-
   void InitText();
 
   void UninitText();
@@ -39,7 +37,7 @@ class TextRender {
   std::unordered_map<char, Character> character_texture_map_;
 };
 
-}
-}
+}  // namespace render
+}  // namespace atn
 
-#endif // NIERE_ALLTOBENICE_RENDER_TEXT_RENDER_H
+#endif  // NIERE_ALLTOBENICE_RENDER_TEXT_RENDER_H

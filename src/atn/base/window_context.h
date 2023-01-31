@@ -16,7 +16,7 @@ struct WindowContext {
   int width;
 };
 
-}
-}
+}  // namespace base
+}  // namespace atn
 
-#endif // NIERE_ALLTOBENICE_BASE_WINDOW_CONTEXT_H
+#endif  // NIERE_ALLTOBENICE_BASE_WINDOW_CONTEXT_H

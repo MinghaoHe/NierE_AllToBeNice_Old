@@ -14,9 +14,8 @@ namespace game {
 
 class EnemyBullet : public base::GameObject {
  public:
-  enum class BulletType {
-    orange, red
-  };
+  enum class BulletType { orange, red };
+
  public:
   EnemyBullet();
   explicit EnemyBullet(std::shared_ptr<base::Object> other);
@@ -28,7 +27,7 @@ class EnemyBullet : public base::GameObject {
 
   virtual void LogicUninit() override;
 
-  virtual void LogicTick(logic::LogicContext &logic_context) override;
+  virtual void LogicTick(logic::LogicContext& logic_context) override;
 
   virtual render::ObjectRenderData GetRenderData() override;
 
@@ -50,8 +49,7 @@ class EnemyBullet : public base::GameObject {
   const int N_ = 48;
 };
 
-}
-}
+}  // namespace game
+}  // namespace atn
 
-
-#endif // NIERE_ALLTOBENICE_GAME_ENEMY_BULLET_H
+#endif  // NIERE_ALLTOBENICE_GAME_ENEMY_BULLET_H

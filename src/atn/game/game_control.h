@@ -6,8 +6,8 @@
 #define NIERE_ALLTOBENICE_GAME_GAME_CONTROL_H
 
 #include <string>
-#include <unordered_map>
 #include <thread>
+#include <unordered_map>
 
 #include "atn/common/utility.h"
 #include "atn/base/game_object.h"
@@ -19,7 +19,8 @@ namespace game {
 
 class GameControl {
  public:
-  GameControl(logic::LogicContext& logic_context, render::RenderContext& render_context);
+  GameControl(logic::LogicContext& logic_context,
+              render::RenderContext& render_context);
 
   ~GameControl();
 
@@ -33,7 +34,6 @@ class GameControl {
   void GameMain();
 
  private:
-
  private:
   logic::LogicContext& logic_context_;
   render::RenderContext& render_context_;
@@ -44,7 +44,7 @@ class GameControl {
   DISALLOW_COPY_AND_ASSIGN(GameControl);
 };
 
-}
-}
+}  // namespace game
+}  // namespace atn
 
-#endif // NIERE_ALLTOBENICE_GAME_GAME_CONTROL_H
+#endif  // NIERE_ALLTOBENICE_GAME_GAME_CONTROL_H

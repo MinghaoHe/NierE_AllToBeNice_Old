@@ -6,14 +6,14 @@
 
 #include <fstream>
 #include <sstream>
-#include <opengl/gl3.h>
+
+#include <3rdparty/glad/glad.h>
 
 namespace atn {
 namespace render {
 
-void
-Shader::PrebuildFile(const std::filesystem::path &vertex_shader_path,
-                     const std::filesystem::path &fragment_shader_path) {
+void Shader::PrebuildFile(const std::filesystem::path &vertex_shader_path,
+                          const std::filesystem::path &fragment_shader_path) {
   std::ifstream vertex_shader_file(vertex_shader_path);
   std::stringstream vertex_shader_stream;
   vertex_shader_stream << vertex_shader_file.rdbuf();
@@ -27,7 +27,8 @@ Shader::PrebuildFile(const std::filesystem::path &vertex_shader_path,
   Prebuild(vertex_shader_source, fragment_shader_source);
 }
 
-void Shader::Prebuild(const std::string_view vertex_shader_source, const std::string_view fragment_shader_source) {
+void Shader::Prebuild(const std::string_view vertex_shader_source,
+                      const std::string_view fragment_shader_source) {
   GLuint vertex_shader = glCreateShader(GL_VERTEX_SHADER);
   const GLchar *vertex_shader_source_list[]{vertex_shader_source.data()};
   glShaderSource(vertex_shader, 1, vertex_shader_source_list, nullptr);
@@ -52,24 +53,27 @@ void Shader::Prebuild(const std::string_view vertex_shader_source, const std::st
 
 void Shader::Delete() { glDeleteProgram(shader_program_id_); }
 
-void Shader::Use() const {
-  glUseProgram(shader_program_id_);
-}
+void Shader::Use() const { glUseProgram(shader_program_id_); }
 
 void Shader::SetInt(const std::string_view name, int i) const {
   glUniform1i(glGetUniformLocation(shader_program_id_, name.data()), i);
 }
 
-void Shader::SetVec3(const std::string_view &name, const glm::vec3 &value) const {
-  glUniform3fv(glGetUniformLocation(shader_program_id_, name.data()), 1, &value[0]);
+void Shader::SetVec3(const std::string_view &name,
+                     const glm::vec3 &value) const {
+  glUniform3fv(glGetUniformLocation(shader_program_id_, name.data()), 1,
+               &value[0]);
 }
 
-void Shader::SetVec3(const std::string_view &name, float x, float y, float z) const {
+void Shader::SetVec3(const std::string_view &name, float x, float y,
+                     float z) const {
   glUniform3f(glGetUniformLocation(shader_program_id_, name.data()), x, y, z);
 }
 
-void Shader::SetMatrix4(const std::string_view name, const glm::mat4 &matrix) const {
-  glUniformMatrix4fv(glGetUniformLocation(shader_program_id_, name.data()), 1, GL_FALSE, &matrix[0][0]);
+void Shader::SetMatrix4(const std::string_view name,
+                        const glm::mat4 &matrix) const {
+  glUniformMatrix4fv(glGetUniformLocation(shader_program_id_, name.data()), 1,
+                     GL_FALSE, &matrix[0][0]);
 }
 
 void Shader::CheckCompileError(GLuint shader) {
@@ -90,5 +94,5 @@ void Shader::CheckLinkError(GLuint program) {
   }
 }
 
-}
-}
+}  // namespace render
+}  // namespace atn

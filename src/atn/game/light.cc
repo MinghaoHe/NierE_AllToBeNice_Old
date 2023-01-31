@@ -5,8 +5,5 @@
 #include "light.h"
 
 namespace atn {
-namespace game {
-
-
-}
-}
+namespace game {}
+}  // namespace atn

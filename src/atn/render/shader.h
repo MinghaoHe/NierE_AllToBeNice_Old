@@ -6,8 +6,8 @@
 #define NIERE_ALLTOBENICE_RENDER_SHADER_H
 
 #include <filesystem>
-#include <opengl/gl3.h>
 
+#include <3rdparty/glad/glad.h>
 #include <3rdparty/glm/glm.hpp>
 
 namespace atn {
@@ -15,9 +15,11 @@ namespace render {
 
 class Shader {
  public:
-  void PrebuildFile(const std::filesystem::path &vertex_shader_path, const std::filesystem::path &fragment_shader_path);
+  void PrebuildFile(const std::filesystem::path &vertex_shader_path,
+                    const std::filesystem::path &fragment_shader_path);
 
-  void Prebuild(const std::string_view vertex_shader_source, const std::string_view fragment_shader_source);
+  void Prebuild(const std::string_view vertex_shader_source,
+                const std::string_view fragment_shader_source);
 
   void Delete();
 
@@ -39,8 +41,7 @@ class Shader {
   GLuint shader_program_id_;
 };
 
-}
-}
+}  // namespace render
+}  // namespace atn
 
-
-#endif // NIERE_ALLTOBENICE_RENDER_SHADER_H
+#endif  // NIERE_ALLTOBENICE_RENDER_SHADER_H

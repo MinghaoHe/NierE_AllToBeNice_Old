@@ -9,18 +9,22 @@
 namespace atn {
 namespace game {
 
-Enemy::Enemy() : base::TextObject("enemy"), hp_(0), fire_cooldown_time_(0), fire_interval_time_(0) {}
+Enemy::Enemy()
+    : base::TextObject("enemy"),
+      hp_(0),
+      fire_cooldown_time_(0),
+      fire_interval_time_(0) {}
 
 Enemy::Enemy(std::shared_ptr<base::Object> other)
-        : base::TextObject(std::dynamic_pointer_cast<base::TextObject>(other)), fire_cooldown_time_(0),
-          fire_interval_time_(0) {
+    : base::TextObject(std::dynamic_pointer_cast<base::TextObject>(other)),
+      fire_cooldown_time_(0),
+      fire_interval_time_(0) {
   std::shared_ptr<Enemy> dother = std::dynamic_pointer_cast<Enemy>(other);
   hp_ = dother->hp_;
   fire_cooldown_time_ = dother->fire_cooldown_time_;
 }
 
-Enemy::~Enemy() {
-}
+Enemy::~Enemy() {}
 
 void Enemy::LogicInit() {
   fire_cooldown_time_ = 250;
@@ -47,7 +51,8 @@ void Enemy::LogicTick(logic::LogicContext &logic_context) {
 }
 
 void Enemy::PrebuildShader() {
-  shader_.PrebuildFile("../src/atn/game/shader/enemy.vs", "../src/atn/game/shader/enemy.fs");
+  shader_.PrebuildFile("../src/atn/game/shader/enemy.vs",
+                       "../src/atn/game/shader/enemy.fs");
 }
 
 void Enemy::SetShaderUniform() {
@@ -55,20 +60,21 @@ void Enemy::SetShaderUniform() {
   shader_.SetVec3("text_color", 1.0f, 1.0f, 1.0f);
 }
 
-void Enemy::SetEnemyTrace(EnemyTrace::MovementType movement_type, float speed, const glm::mat4 &start_model,
+void Enemy::SetEnemyTrace(EnemyTrace::MovementType movement_type, float speed,
+                          const glm::mat4 &start_model,
                           const glm::mat4 &end_model) {
   enemy_trace_.SetEnemyTrace(movement_type, speed, start_model, end_model);
 }
 
-void Enemy::SetEnemyState(int hp, float scale) {
+void Enemy::SetEnemyState(int hp) {
   hp_ = hp;
-  scale_ = scale;
 }
 
-void Enemy::SetEnemyAttackType(int fire_cooldown_time, EnemyAttack::AttackType attack_type) {
+void Enemy::SetEnemyAttackType(int fire_cooldown_time,
+                               EnemyAttack::AttackType attack_type) {
   fire_cooldown_time_ = fire_cooldown_time;
   enemy_attack_.SetAttackType(attack_type);
 }
 
-}
-}
+}  // namespace game
+}  // namespace atn

@@ -24,7 +24,7 @@ class PodBullet : public base::GameObject {
 
   virtual void LogicUninit() override;
 
-  virtual void LogicTick(logic::LogicContext &logic_context) override;
+  virtual void LogicTick(logic::LogicContext& logic_context) override;
 
   virtual void PrebuildShader() override;
 
@@ -40,7 +40,7 @@ class PodBullet : public base::GameObject {
   glm::mat4 translation_matrix_;
 };
 
-}
-}
+}  // namespace game
+}  // namespace atn
 
-#endif // NIERE_ALLTOBENICE_GAME_POD_BULLET_H
+#endif  // NIERE_ALLTOBENICE_GAME_POD_BULLET_H

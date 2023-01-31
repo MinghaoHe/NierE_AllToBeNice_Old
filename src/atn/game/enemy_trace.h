@@ -6,6 +6,7 @@
 #define NIERE_ALLTOBENICE_GAME_ENEMY_TRACE_H
 
 #include <random>
+
 #include <3rdparty/glm/glm.hpp>
 
 namespace atn {
@@ -13,13 +14,13 @@ namespace game {
 
 class EnemyTrace {
  public:
-  enum class MovementType {
-    Fixed, Moving
-  };
+  enum class MovementType { Fixed, Moving };
+
  public:
   EnemyTrace();
 
-  void SetEnemyTrace(MovementType movement_type, float speed, const glm::mat4 &start_model,
+  void SetEnemyTrace(MovementType movement_type, float speed,
+                     const glm::mat4 &start_model,
                      const glm::mat4 &end_model = glm::mat4(1.0f));
 
   glm::mat4 GetTraceModel(int interval_time);
@@ -48,8 +49,7 @@ class EnemyTrace {
   std::uniform_real_distribution<float> y_random_;
 };
 
-}
-}
+}  // namespace game
+}  // namespace atn
 
-
-#endif // NIERE_ALLTOBENICE_GAME_ENEMY_TRACE_H
+#endif  // NIERE_ALLTOBENICE_GAME_ENEMY_TRACE_H

@@ -7,17 +7,17 @@
 #include <3rdparty/glm/gtc/matrix_transform.hpp>
 
 #include "atn/base/game_engine.h"
-#include "atn/game/pod.h"
-#include "atn/game/pod_bullet.h"
 #include "atn/game/enemy.h"
 #include "atn/game/enemy_bullet.h"
-
+#include "atn/game/pod.h"
+#include "atn/game/pod_bullet.h"
 
 namespace atn {
 namespace game {
 
-GameControl::GameControl(logic::LogicContext &logic_context, render::RenderContext &render_context)
-        : logic_context_(logic_context), render_context_(render_context) {}
+GameControl::GameControl(logic::LogicContext &logic_context,
+                         render::RenderContext &render_context)
+    : logic_context_(logic_context), render_context_(render_context) {}
 
 GameControl::~GameControl() {}
 
@@ -32,6 +32,9 @@ void GameControl::Initialize() {
 
   std::shared_ptr<EnemyBullet> enemy_bullet = std::make_shared<EnemyBullet>();
   base::AddGlobalObjectCache(enemy_bullet);
+
+  physics::AddCollisionRelation(pod_bullet->Tag(),
+                                {enemy->Tag(), enemy_bullet->Tag()});
 
   // create game control thread
   std::thread(&GameControl::GameMain, this).detach();
@@ -50,14 +53,15 @@ void GameControl::GameMain() {
   std::shared_ptr<game::Pod> pod = base::NewObject<game::Pod>("pod");
   base::AddObject(pod);
   std::shared_ptr<game::Enemy> enemy = base::NewObject<game::Enemy>("enemy");
-  enemy->SetEnemyState(20, 1.0f);
+  enemy->SetEnemyState(20);
   enemy->SetText("Hello World", 0.0015f);
-  enemy->SetEnemyTrace(EnemyTrace::MovementType::Moving, 0.001f, glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
+  enemy->SetEnemyTrace(
+      EnemyTrace::MovementType::Moving, 0.001f,
+      glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 1.0f, 0.0f)));
   enemy->SetEnemyAttackType(400, EnemyAttack::AttackType::Medium);
   base::AddObject(enemy);
 }
 
-}
+}  // namespace game
 
-
-}
+}  // namespace atn

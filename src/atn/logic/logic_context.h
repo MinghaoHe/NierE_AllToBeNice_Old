@@ -5,8 +5,8 @@
 #ifndef NIERE_ALLTOBENICE_LOGIC_LOGIC_CONTEXT_H
 #define NIERE_ALLTOBENICE_LOGIC_LOGIC_CONTEXT_H
 
-#include <unordered_set>
 #include <vector>
+#include <unordered_set>
 
 namespace atn {
 
@@ -27,7 +27,7 @@ struct LogicContext {
   int interval_time = 0;
 };
 
-}
-}
+}  // namespace logic
+}  // namespace atn
 
-#endif // NIERE_ALLTOBENICE_LOGIC_LOGIC_CONTEXT_H
+#endif  // NIERE_ALLTOBENICE_LOGIC_LOGIC_CONTEXT_H

@@ -5,17 +5,18 @@
 #ifndef NIERE_ALLTOBENICE_BASE_GAME_ENGINE_H
 #define NIERE_ALLTOBENICE_BASE_GAME_ENGINE_H
 
-#include <set>
+#include <unordered_set>
 #include <unordered_map>
 
 #include "atn/common/utility.h"
-#include "atn/base/game_object.h"
 #include "atn/base/window_context.h"
+#include "atn/base/game_object.h"
 #include "atn/base/garbage_collection.h"
-#include "atn/game/game_control.h"
 #include "atn/logic/logic_engine.h"
-#include "atn/render/render_engine.h"
 #include "atn/physics/physics_engine.h"
+#include "atn/render/render_engine.h"
+#include "atn/game/game_control.h"
+
 
 namespace atn {
 namespace base {
@@ -45,7 +46,7 @@ class GameEngine {
 
   void RemoveObject(std::shared_ptr<Object> object);
 
-  template<class T>
+  template <class T>
   std::shared_ptr<T> NewObject(const std::string &object_tag) {
     return std::make_shared<T>((global_objects_cache_map_[object_tag]));
   }
@@ -53,6 +54,8 @@ class GameEngine {
   std::shared_ptr<logic::LogicEngine> GetLogic() { return logic_engine_; }
 
   std::shared_ptr<render::RenderEngine> GetRender() { return render_engine_; }
+
+  std::shared_ptr<physics::PhysicsEngine> GetPhysics() { return physics_engine_; }
 
   void SetFps(int fps);
 
@@ -64,7 +67,7 @@ class GameEngine {
   std::shared_ptr<game::GameControl> game_control_;
   std::shared_ptr<base::GarbageCollection> garbage_collection_;
 
-  std::set<std::shared_ptr<base::Object>> objects_;
+  std::unordered_set<std::shared_ptr<base::Object>> objects_;
   std::unordered_map<std::string, std::shared_ptr<base::Object>> global_objects_cache_map_;
 
   int fps_;
@@ -83,7 +86,7 @@ inline void RemoveGlobalObjectCache(std::shared_ptr<Object> object_cache) {
   GameEngine::Instance().RemoveGlobalObjectCache(object_cache);
 }
 
-template<class T>
+template <class T>
 inline std::shared_ptr<T> NewObject(const std::string &object_tag) {
   return GameEngine::Instance().NewObject<T>(object_tag);
 }
@@ -96,8 +99,7 @@ inline void RemoveObject(std::shared_ptr<Object> object) {
   GameEngine::Instance().RemoveObject(object);
 }
 
-}
-}
+}  // namespace base
+}  // namespace atn
 
-
-#endif // NIERE_ALLTOBENICE_BASE_GAME_ENGINE_H
+#endif  // NIERE_ALLTOBENICE_BASE_GAME_ENGINE_H

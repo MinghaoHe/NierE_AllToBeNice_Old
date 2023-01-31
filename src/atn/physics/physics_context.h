@@ -5,8 +5,8 @@
 #ifndef NIERE_ALLTOBENICE_PHYSICS_PHYSICS_CONTEXT_H
 #define NIERE_ALLTOBENICE_PHYSICS_PHYSICS_CONTEXT_H
 
-#include <variant>
 #include <array>
+#include <variant>
 
 #include <3rdparty/glm/glm.hpp>
 
@@ -32,7 +32,7 @@ struct BoundingBox {
   std::variant<CircleBox, RectangleBox> box_data;
 };
 
-}
-}
+}  // namespace physics
+}  // namespace atn
 
-#endif // NIERE_ALLTOBENICE_PHYSICS_PHYSICS_CONTEXT_H
+#endif  // NIERE_ALLTOBENICE_PHYSICS_PHYSICS_CONTEXT_H

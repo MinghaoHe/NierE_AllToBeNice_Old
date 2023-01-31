@@ -39,8 +39,7 @@ class Pod : public base::GameObject {
   glm::mat4 translation_matrix_;
 };
 
-}
-}
+}  // namespace game
+}  // namespace atn
 
-
-#endif // NIERE_ALLTOBENICE_GAME_POD_H
+#endif  // NIERE_ALLTOBENICE_GAME_POD_H

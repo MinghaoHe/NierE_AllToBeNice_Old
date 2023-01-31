@@ -2,6 +2,7 @@
 #define NIERE_ALLTOBENICE_BASE_GAME_WINDOW_H
 
 #include <string>
+
 #include <3rdparty/glfw/glfw3.h>
 
 #include "atn/common/utility.h"
@@ -20,7 +21,7 @@ class GameWindow {
   void Initialize(const std::string_view window_name);
   void Uninitialize();
 
-  WindowContext& CreateWindow();
+  WindowContext& Create();
 
  public:
   static constexpr const int kInitWidth = 800;

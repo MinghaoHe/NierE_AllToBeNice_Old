@@ -2,26 +2,34 @@
 // Created by minghaohe on 2023/1/19.
 //
 
+#include <cmath>
+
 #include "enemy_bullet.h"
 
 namespace atn {
 namespace game {
 
-EnemyBullet::EnemyBullet() : base::GameObject("enemy_bullet"), start_model_(glm::mat4(1.0f)),
-                             translation_matrix_(glm::mat4(1.0f)), bullet_type_(BulletType::orange), speed_(0.0f), r_(0.0f) {}
+EnemyBullet::EnemyBullet()
+    : base::GameObject("enemy_bullet"),
+      start_model_(glm::mat4(1.0f)),
+      translation_matrix_(glm::mat4(1.0f)),
+      bullet_type_(BulletType::orange),
+      speed_(0.0f),
+      r_(0.0f) {}
 
 EnemyBullet::EnemyBullet(std::shared_ptr<base::Object> other)
-        : base::GameObject(std::dynamic_pointer_cast<base::GameObject>(other)), start_model_(glm::mat4(1.0f)),
-          translation_matrix_(glm::mat4(1.0f)) {
-  std::shared_ptr<EnemyBullet> dother = std::dynamic_pointer_cast<EnemyBullet>(other);
+    : base::GameObject(std::dynamic_pointer_cast<base::GameObject>(other)),
+      start_model_(glm::mat4(1.0f)),
+      translation_matrix_(glm::mat4(1.0f)) {
+  std::shared_ptr<EnemyBullet> dother =
+      std::dynamic_pointer_cast<EnemyBullet>(other);
   speed_ = dother->speed_;
   r_ = dother->r_;
   bullet_type_ = dother->bullet_type_;
   EnableCollisionDetection(bullet_type_ == EnemyBullet::BulletType::orange);
 }
 
-EnemyBullet::~EnemyBullet() {
-}
+EnemyBullet::~EnemyBullet() {}
 
 void EnemyBullet::LogicInit() {
   r_ = 0.05f;
@@ -33,10 +41,11 @@ void EnemyBullet::LogicInit() {
 void EnemyBullet::LogicUninit() {}
 
 void EnemyBullet::LogicTick(logic::LogicContext &logic_context) {
-  translation_matrix_[3][1] += (speed_ * static_cast<float>(logic_context.interval_time));
+  translation_matrix_[3][1] +=
+      (speed_ * static_cast<float>(logic_context.interval_time));
 
-  if (translation_matrix_[3][1] > 3.0f || translation_matrix_[3][1] < -3.0f || translation_matrix_[3][2] > 3.0f ||
-      translation_matrix_[3][2] < -3.0f) {
+  if (translation_matrix_[3][1] > 3.0f || translation_matrix_[3][1] < -3.0f ||
+      translation_matrix_[3][2] > 3.0f || translation_matrix_[3][2] < -3.0f) {
     RemoveCurrentObject();
     return;
   }
@@ -72,23 +81,27 @@ render::ObjectRenderData EnemyBullet::GetRenderData() {
 
   physics::CircleBox circle_box;
   circle_box.r = r_;
-  SetBoundingBox(physics::BBoxType::circle, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), circle_box);
+  SetBoundingBox(physics::BBoxType::circle, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
+                 circle_box);
 
   return render_data;
 }
 
 void EnemyBullet::PrebuildShader() {
-  shader_.PrebuildFile("../src/atn/game/shader/enemy_bullet.vs", "../src/atn/game/shader/enemy_bullet.fs");
+  shader_.PrebuildFile("../src/atn/game/shader/enemy_bullet.vs",
+                       "../src/atn/game/shader/enemy_bullet.fs");
 }
 
 void EnemyBullet::SetShaderUniform() {
   shader_.SetMatrix4("model", GetModelMatrix());
   if (bullet_type_ == BulletType::orange) {
-    shader_.SetVec3("color", static_cast<float>(0xef) / static_cast<float>(0xff),
+    shader_.SetVec3("color",
+                    static_cast<float>(0xef) / static_cast<float>(0xff),
                     static_cast<float>(0x7f) / static_cast<float>(0xff),
                     static_cast<float>(0x37) / static_cast<float>(0xff));
   } else if (bullet_type_ == BulletType::red) {
-    shader_.SetVec3("color", static_cast<float>(0xcd) / static_cast<float>(0xff),
+    shader_.SetVec3("color",
+                    static_cast<float>(0xcd) / static_cast<float>(0xff),
                     static_cast<float>(0x33) / static_cast<float>(0xff),
                     static_cast<float>(0x58) / static_cast<float>(0xff));
   }
@@ -106,5 +119,5 @@ void EnemyBullet::SetBulletType(BulletType bullet_type) {
   }
 }
 
-}
-}
+}  // namespace game
+}  // namespace atn

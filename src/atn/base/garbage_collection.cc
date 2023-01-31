@@ -7,13 +7,15 @@
 namespace atn {
 namespace base {
 
-GarbageCollection::GarbageCollection(std::set<std::shared_ptr<base::Object>> &objects) : objects_(objects) {
-
-}
+GarbageCollection::GarbageCollection(
+    std::unordered_set<std::shared_ptr<base::Object>> &objects)
+    : objects_(objects) {}
 
 void GarbageCollection::Tick() {
-  std::erase_if(objects_, [](std::shared_ptr<base::Object> garbage) { return garbage->GarbageFlag(); });
+  std::erase_if(objects_, [](std::shared_ptr<base::Object> garbage) {
+    return garbage->GarbageFlag();
+  });
 }
 
-}
-}
+}  // namespace base
+}  // namespace atn

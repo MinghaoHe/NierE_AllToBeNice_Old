@@ -6,7 +6,9 @@
 #define NIERE_ALLTOBENICE_GAME_ENEMY_ATTACK_H
 
 #include <random>
+
 #include <3rdparty/glm/glm.hpp>
+
 
 namespace atn {
 namespace game {
@@ -14,8 +16,13 @@ namespace game {
 class EnemyAttack {
  public:
   enum class AttackType {
-    Normal /* 1/s */, Medium /*  */, Hard /*  */, Hell, /*  */
-    Sp3, Sp4, Sp6
+    Normal /* 1/s */,
+    Medium /*  */,
+    Hard /*  */,
+    Hell, /*  */
+    Sp3,
+    Sp4,
+    Sp6
   };
 
   EnemyAttack();
@@ -43,7 +50,7 @@ class EnemyAttack {
   AttackType attack_type_;
 };
 
-}
-}
+}  // namespace game
+}  // namespace atn
 
-#endif // NIERE_ALLTOBENICE_GAME_ENEMY_ATTACK_H
+#endif  // NIERE_ALLTOBENICE_GAME_ENEMY_ATTACK_H

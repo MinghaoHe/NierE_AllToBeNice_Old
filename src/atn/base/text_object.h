@@ -18,7 +18,7 @@ class TextObject : public Object {
 
   virtual ~TextObject() noexcept;
 
-  virtual void RenderTick(const render::RenderContext &render_context) override;
+  virtual void RenderTick(const render::RenderContext& render_context) override;
 
   void SetModelMatrix(const glm::mat4& model);
   glm::mat4 GetModelMatrix() const;
@@ -48,8 +48,7 @@ class TextObject : public Object {
   std::shared_ptr<render::TextRender> text_render_;
 };
 
-}
-}
+}  // namespace base
+}  // namespace atn
 
-
-#endif // NIERE_ALLTOBENICE_BASE_TEXT_OBJECT_H
+#endif  // NIERE_ALLTOBENICE_BASE_TEXT_OBJECT_H

@@ -7,7 +7,6 @@
 
 #include "atn/base/object.h"
 
-
 namespace atn {
 namespace base {
 
@@ -19,11 +18,11 @@ class GameObject : public Object {
   virtual ~GameObject() noexcept;
 
   virtual void RenderInit() override;
-  virtual void  RenderUninit() override;
-  virtual void RenderTick(const render::RenderContext &render_context) override;
+  virtual void RenderUninit() override;
+  virtual void RenderTick(const render::RenderContext& render_context) override;
 
   virtual render::ObjectRenderData GetRenderData() = 0;
-  virtual void ReleaseRenderData() {};
+  virtual void ReleaseRenderData(){};
 
  protected:
   GLuint vbo_;
@@ -33,9 +32,7 @@ class GameObject : public Object {
   GLsizei gl_element_cout_;
 };
 
+}  // namespace base
+}  // namespace atn
 
-
-}
-}
-
-#endif // NIERE_ALLTOBENICE_BASE_GAME_OBJECT_H
+#endif  // NIERE_ALLTOBENICE_BASE_GAME_OBJECT_H

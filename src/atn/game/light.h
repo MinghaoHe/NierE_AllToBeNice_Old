@@ -8,11 +8,9 @@
 namespace atn {
 namespace game {
 
-class Light {
+class Light {};
 
-};
+}  // namespace game
+}  // namespace atn
 
-}
-}
-
-#endif // NIERE_ALLTOBENICE_GAME_LIGHT_H
+#endif  // NIERE_ALLTOBENICE_GAME_LIGHT_H

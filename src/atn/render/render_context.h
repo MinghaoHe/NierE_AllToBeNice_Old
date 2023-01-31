@@ -6,9 +6,8 @@
 #define NIERE_ALLTOBENICE_RANDER_RENDER_CONTEXT_H
 
 #include <vector>
-#include <opengl/gl3.h>
-#include <opengl/gltypes.h>
 
+#include <3rdparty/glad/glad.h>
 #include <3rdparty/glm/glm.hpp>
 
 namespace atn {
@@ -24,7 +23,7 @@ struct TextureData {
   GLenum format;
   GLsizei width;
   GLsizei height;
-  void *pixels;
+  void* pixels;
 };
 
 struct ObjectRenderData {
@@ -176,7 +175,7 @@ inline constexpr const char* TEXTURE_NAME(int index) {
   }
 }
 
-}
-}
+}  // namespace render
+}  // namespace atn
 
-#endif // NIERE_ALLTOBENICE_RANDER_RENDER_CONTEXT_H
+#endif  // NIERE_ALLTOBENICE_RANDER_RENDER_CONTEXT_H

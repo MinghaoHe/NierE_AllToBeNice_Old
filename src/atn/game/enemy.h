@@ -8,8 +8,8 @@
 #include <3rdparty/glm/glm.hpp>
 
 #include "atn/base/text_object.h"
-#include "atn/game/enemy_trace.h"
 #include "atn/game/enemy_attack.h"
+#include "atn/game/enemy_trace.h"
 
 namespace atn {
 namespace game {
@@ -33,12 +33,14 @@ class Enemy : public base::TextObject {
 
   virtual void SetShaderUniform() override;
 
-  void SetEnemyTrace(EnemyTrace::MovementType movement_type, float speed, const glm::mat4 &start_model,
+  void SetEnemyTrace(EnemyTrace::MovementType movement_type, float speed,
+                     const glm::mat4 &start_model,
                      const glm::mat4 &end_model = glm::mat4(1.0f));
 
-  void SetEnemyState(int hp, float scale);
+  void SetEnemyState(int hp);
 
-  void SetEnemyAttackType(int fire_cooldown_time, EnemyAttack::AttackType attack_type);
+  void SetEnemyAttackType(int fire_cooldown_time,
+                          EnemyAttack::AttackType attack_type);
 
  private:
   int hp_;
@@ -48,7 +50,7 @@ class Enemy : public base::TextObject {
   EnemyAttack enemy_attack_;
 };
 
-}
-}
+}  // namespace game
+}  // namespace atn
 
-#endif // NIERE_ALLTOBENICE_GAME_ENEMY_H
+#endif  // NIERE_ALLTOBENICE_GAME_ENEMY_H

@@ -1,5 +1,3 @@
-#include <chrono>
-
 #include "atn/base/game_engine.h"
 #include "atn/base/game_window.h"
 
@@ -11,9 +9,9 @@ int main(int argc, char *argv[]) {
 
   atn::base::GameWindow& window = atn::base::GameWindow::Instance();
   window.Initialize("NierE_AllToBeNice");
-  atn::base::WindowContext& window_context = window.CreateWindow();
+  atn::base::WindowContext& window_context = window.Create();
 
-  atn::base::GameEngine& engine =  atn::base::GameEngine::Instance();
+  atn::base::GameEngine& engine = atn::base::GameEngine::Instance();
   engine.Initialize(&window_context);
   engine.SetFps(fps);
 

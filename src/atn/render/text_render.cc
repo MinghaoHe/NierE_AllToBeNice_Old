@@ -4,6 +4,8 @@
 
 #include "text_render.h"
 
+#include <algorithm>
+
 #include <3rdparty/ft2build.h>
 #include FT_FREETYPE_H
 
