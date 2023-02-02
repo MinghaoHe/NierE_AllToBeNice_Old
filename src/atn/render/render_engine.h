@@ -39,9 +39,7 @@ class RenderEngine {
 
   std::shared_ptr<TextRender> GetTextRender();
 
- private:
-  static void FrameBufferSizeCallback(GLFWwindow *window, int width,
-                                      int height);
+  void FrameBufferSizeCallback(GLFWwindow *window, int width, int height);
 
  private:
   base::WindowContext &window_context_;

@@ -6,10 +6,22 @@
 
 #include <algorithm>
 
-#include <3rdparty/glm/gtc/matrix_transform.hpp>
-#ifndef __APPLE__
 #include <3rdparty/glad/glad.h>
-#endif
+#include <3rdparty/glm/gtc/matrix_transform.hpp>
+
+
+#include "atn/base/game_engine.h"
+
+
+namespace {
+
+void FrameBufferSizeCallbackWrap(GLFWwindow* window, int width, int height) {
+  std::invoke(&atn::render::RenderEngine::FrameBufferSizeCallback,
+              atn::base::GameEngine::Instance().GetRender().get(), 
+              window, width, height);
+}
+
+}
 
 namespace atn {
 namespace render {
@@ -26,7 +38,7 @@ RenderEngine::~RenderEngine() noexcept {}
 
 void RenderEngine::InitGlobalRenderEnvironment() {
   glfwMakeContextCurrent(window_context_.window);
-  glfwSetFramebufferSizeCallback(window_context_.window, FrameBufferSizeCallback);
+  glfwSetFramebufferSizeCallback(window_context_.window, FrameBufferSizeCallbackWrap);
   gladLoadGLLoader(reinterpret_cast<GLADloadproc>(&glfwGetProcAddress));
 }
 
@@ -37,7 +49,7 @@ void RenderEngine::InitRender() {
   render_context_.projection =
       glm::perspective(glm::radians(45.0f),
                        static_cast<float>(window_context_.width) /
-                           static_cast<float>(window_context_.hight),
+                           static_cast<float>(window_context_.height),
                        0.1f, 100.0f);
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_MULTISAMPLE);
@@ -69,8 +81,9 @@ void RenderEngine::Tick() {
 
 RenderContext &RenderEngine::GetRenderContext() { return render_context_; }
 
-void RenderEngine::FrameBufferSizeCallback(GLFWwindow *window, int width,
-                                           int height) {
+void RenderEngine::FrameBufferSizeCallback(GLFWwindow *window, int width, int height) {
+  window_context_.width = width;
+  window_context_.height = height;
   glViewport(0, 0, width, height);
 }
 

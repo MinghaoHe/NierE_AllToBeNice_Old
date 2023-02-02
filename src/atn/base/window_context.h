@@ -12,7 +12,7 @@ namespace base {
 
 struct WindowContext {
   GLFWwindow* window;
-  int hight;
+  int height;
   int width;
 };
 

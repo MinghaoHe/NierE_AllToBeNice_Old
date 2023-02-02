@@ -19,6 +19,7 @@ void GameWindow::Initialize(const std::string_view window_name) {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  glfwWindowHint(GLFW_SAMPLES, 4);
 
 #ifdef __APPLE__
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
@@ -31,7 +32,7 @@ WindowContext& GameWindow::Create() {
   window_context_.window = glfwCreateWindow(
       kInitWidth, kInitHeight, window_name_.c_str(), nullptr, nullptr);
   window_context_.width = kInitWidth;
-  window_context_.hight = kInitHeight;
+  window_context_.height = kInitHeight;
   return window_context_;
 }
 

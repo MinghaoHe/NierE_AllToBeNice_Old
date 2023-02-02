@@ -77,8 +77,8 @@ void LogicEngine::CursorPosCallback(float xpos, float ypos) {
       (xpos - static_cast<float>(window_context_.width) / 2.0f) /
       static_cast<float>(window_context_.width);
   logic_context_.event.cursor_event.ypos =
-      (static_cast<float>(window_context_.hight) / 2.0f - ypos) /
-      -static_cast<float>(window_context_.hight);
+      (static_cast<float>(window_context_.height) / 2.0f - ypos) /
+      -static_cast<float>(window_context_.height);
 }
 
 void LogicEngine::CharInputCallback(char key, int action) {
