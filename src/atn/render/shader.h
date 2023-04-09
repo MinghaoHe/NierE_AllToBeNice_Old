@@ -15,6 +15,8 @@ namespace render {
 
 class Shader {
  public:
+  Shader();
+
   void PrebuildFile(const std::filesystem::path &vertex_shader_path,
                     const std::filesystem::path &fragment_shader_path);
 

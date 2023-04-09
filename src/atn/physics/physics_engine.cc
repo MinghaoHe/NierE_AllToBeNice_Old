@@ -113,14 +113,13 @@ void PhysicsEngine::CollisionDetection() {
       if (main_objects.empty()) break;
 
       std::vector<std::shared_ptr<base::Object>> sub_objects;
-      std::for_each(relation.second.begin(), relation.second.end(),
-                    [&sub_objects, &object_map](const std::string &tag) {
-                      std::vector<std::shared_ptr<base::Object>> merge;
-                      std::merge(sub_objects.begin(), sub_objects.end(),
-                                 object_map[tag].begin(), object_map[tag].end(),
-                                 std::back_inserter(merge));
-                      sub_objects = merge;
-                    });
+      std::for_each(
+          relation.second.begin(), relation.second.end(),
+          [&sub_objects, &object_map](const std::string &tag) {
+            for (std::shared_ptr<base::Object> object : object_map[tag]) {
+              sub_objects.push_back(object);
+            }
+          });
       if (sub_objects.empty()) break;
 
       for (std::shared_ptr<base::Object> main_object : main_objects) {

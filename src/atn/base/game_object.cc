@@ -72,7 +72,13 @@ void GameObject::RenderUninit() {
   if (!textures_.empty()) glDeleteTextures(textures_.size(), &textures_[0]);
 }
 
-void GameObject::RenderTick(const render::RenderContext& render_context) {
+void GameObject::RenderTick(
+    const render::RenderContext& render_context,
+    const std::vector<render::FrameBuffer>& frame_buffers) {
+  frame_buffers[static_cast<size_t>(render::FrameIndex::kMain)].Bind();
+
+  glEnable(GL_DEPTH_TEST);
+
   glBindVertexArray(vao_);
   shader_.Use();
   for (size_t i = 0; i < textures_.size(); ++i) {
@@ -85,6 +91,8 @@ void GameObject::RenderTick(const render::RenderContext& render_context) {
   SetShaderUniform();
   glDrawElements(GL_TRIANGLES, gl_element_cout_, GL_UNSIGNED_INT, 0);
   glBindVertexArray(0);
+
+  frame_buffers[static_cast<size_t>(render::FrameIndex::kMain)].Unbind();
 }
 
 }  // namespace base

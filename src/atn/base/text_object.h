@@ -18,7 +18,7 @@ class TextObject : public Object {
 
   virtual ~TextObject() noexcept;
 
-  virtual void RenderTick(const render::RenderContext& render_context) override;
+  virtual void RenderTick(const render::RenderContext& render_context, const std::vector<render::FrameBuffer>& frame_buffers) override;
 
   void SetModelMatrix(const glm::mat4& model);
   glm::mat4 GetModelMatrix() const;

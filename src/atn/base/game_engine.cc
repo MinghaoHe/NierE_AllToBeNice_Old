@@ -9,7 +9,10 @@
 namespace atn {
 namespace base {
 
-GameEngine::GameEngine() : fps_(30) {}
+GameEngine::GameEngine()
+    : window_context_(nullptr),
+      fps_(30),
+      current_tick_duration_(std::chrono::milliseconds(0)) {}
 
 GameEngine::~GameEngine() noexcept {}
 

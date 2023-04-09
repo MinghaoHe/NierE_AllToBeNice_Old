@@ -14,6 +14,7 @@
 #include "atn/common/utility.h"
 #include "atn/logic/logic_context.h"
 #include "atn/render/render_context.h"
+#include "atn/render/frame_buffer.h"
 #include "atn/render/shader.h"
 #include "atn/physics/physics_context.h"
 
@@ -38,7 +39,7 @@ class Object {
   // render
   virtual void RenderInit();
   virtual void RenderUninit();
-  virtual void RenderTick(const render::RenderContext& render_context) = 0;
+  virtual void RenderTick(const render::RenderContext& render_context, const std::vector<render::FrameBuffer>& frame_buffers) = 0;
 
   // render shader
   virtual void PrebuildShader() = 0;

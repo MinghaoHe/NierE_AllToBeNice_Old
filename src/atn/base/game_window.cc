@@ -33,6 +33,10 @@ WindowContext& GameWindow::Create() {
       kInitWidth, kInitHeight, window_name_.c_str(), nullptr, nullptr);
   window_context_.width = kInitWidth;
   window_context_.height = kInitHeight;
+
+  glfwSetWindowSizeLimits(window_context_.window, window_context_.width,
+                          window_context_.height, window_context_.width,
+                          window_context_.height);
   return window_context_;
 }
 

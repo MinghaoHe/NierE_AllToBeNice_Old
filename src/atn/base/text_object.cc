@@ -14,9 +14,12 @@ atn::physics::RectangleBox GetTextBoundingVertices(
     const glm::mat4 &model_adjust_matrix, float width, float height) {
   atn::physics::RectangleBox rectangle_box;
   rectangle_box.vertices[0] = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-  rectangle_box.vertices[1] = model_adjust_matrix * glm::vec4(width, 0.0f, 0.0f, 1.0f);
-  rectangle_box.vertices[2] = model_adjust_matrix * glm::vec4(0.0f, height, 0.0f, 1.0f);
-  rectangle_box.vertices[3] = model_adjust_matrix * glm::vec4(width, height, 0.0f, 1.0f);
+  rectangle_box.vertices[1] =
+      model_adjust_matrix * glm::vec4(width, 0.0f, 0.0f, 1.0f);
+  rectangle_box.vertices[2] =
+      model_adjust_matrix * glm::vec4(0.0f, height, 0.0f, 1.0f);
+  rectangle_box.vertices[3] =
+      model_adjust_matrix * glm::vec4(width, height, 0.0f, 1.0f);
 
   return rectangle_box;
 }
@@ -47,7 +50,11 @@ TextObject::TextObject(std::shared_ptr<Object> other)
 
 TextObject::~TextObject() noexcept { DestoryTextRenderObject(); }
 
-void TextObject::RenderTick(const render::RenderContext &render_context) {
+void TextObject::RenderTick(
+    const render::RenderContext &render_context,
+    const std::vector<render::FrameBuffer> &frame_buffers) {
+  frame_buffers[static_cast<size_t>(render::FrameIndex::kMain)].Bind();
+
   if (need_generate_text_) {
     GenerateTextRenderObject();
     need_generate_text_ = false;
@@ -57,6 +64,7 @@ void TextObject::RenderTick(const render::RenderContext &render_context) {
   shader_.SetMatrix4("projection", render_context.projection);
   shader_.SetMatrix4("view", render_context.view);
   SetShaderUniform();
+  glEnable(GL_DEPTH_TEST);
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -75,6 +83,8 @@ void TextObject::RenderTick(const render::RenderContext &render_context) {
   glBindTexture(GL_TEXTURE_2D, 0);
 
   glDisable(GL_BLEND);
+
+  frame_buffers[static_cast<size_t>(render::FrameIndex::kMain)].Unbind();
 }
 
 void TextObject::SetModelMatrix(const glm::mat4 &model) {
@@ -150,7 +160,8 @@ void TextObject::GenerateTextRenderObject() {
       x += (char_texture.advance >> 6) * scale_;
     }
   }
-  model_adjust_matrix_ = glm::translate(glm::mat4(1.0f), glm::vec3(-width_ / 2.0f, -height_ / 2.0f, 0.0f));
+  model_adjust_matrix_ = glm::translate(
+      glm::mat4(1.0f), glm::vec3(-width_ / 2.0f, -height_ / 2.0f, 0.0f));
   SetBoundingBox(
       physics::BBoxType::rectangle, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f),
       GetTextBoundingVertices(model_adjust_matrix_, width_, height_));

@@ -3,6 +3,8 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.20)
 PROJECT(NierE_AllToBeNice)
 
 SET(CMAKE_CXX_STANDARD 20)
+SET(CMAKE_CXX_STANDARD_REQUIRED ON)
+SET(CMAKE_CXX_EXTENSIONS OFF)
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
 
 IF(WIN32)
@@ -80,6 +82,10 @@ SET(ATN_SOURCE_FILES
     src/atn/render/shader.h
     src/atn/render/text_render.cc
     src/atn/render/text_render.h
+    src/atn/render/frame_buffer.cc
+    src/atn/render/frame_buffer.h
+    src/atn/render/screen_buffer.cc
+    src/atn/render/screen_buffer.h
 
     src/atn/logic/logic_engine.cc
     src/atn/logic/logic_engine.h
@@ -107,6 +113,8 @@ SET(ATN_SOURCE_FILES
     src/atn/game/enemy_attack.h)
 
 SET(ATN_SHADER_FILES
+    src/atn/game/shader/screen.vs
+    src/atn/game/shader/screen.fs
     src/atn/game/shader/pod.vs
     src/atn/game/shader/pod.fs
     src/atn/game/shader/pod_bullet.vs

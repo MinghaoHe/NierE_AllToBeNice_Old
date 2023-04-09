@@ -19,7 +19,7 @@ class GameObject : public Object {
 
   virtual void RenderInit() override;
   virtual void RenderUninit() override;
-  virtual void RenderTick(const render::RenderContext& render_context) override;
+  virtual void RenderTick(const render::RenderContext& render_context, const std::vector<render::FrameBuffer>& frame_buffers) override;
 
   virtual render::ObjectRenderData GetRenderData() = 0;
   virtual void ReleaseRenderData(){};

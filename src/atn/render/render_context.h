@@ -175,6 +175,12 @@ inline constexpr const char* TEXTURE_NAME(int index) {
   }
 }
 
+enum class FrameIndex {
+  kMain = 0,
+  kBloom,
+  kMax
+};
+
 }  // namespace render
 }  // namespace atn
 

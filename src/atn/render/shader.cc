@@ -12,6 +12,8 @@
 namespace atn {
 namespace render {
 
+Shader::Shader() : shader_program_id_(0) {}
+
 void Shader::PrebuildFile(const std::filesystem::path &vertex_shader_path,
                           const std::filesystem::path &fragment_shader_path) {
   std::ifstream vertex_shader_file(vertex_shader_path);
